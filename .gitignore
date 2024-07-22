@@ -44,3 +44,10 @@ yarn-error.log*
 
 # idea files
 .idea
+
+# Serwist
+**/public/serwist**
+**/public/sw**
+**/public/worker**
+**/public/fallback**
+**/public/precache**
