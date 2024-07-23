@@ -4,6 +4,7 @@ import { GeistSans } from 'geist/font/sans';
 import { type Viewport, type Metadata } from 'next';
 
 import { TRPCReactProvider } from '~/trpc/react';
+import { ThemeProvider } from '~/components/theme-provider';
 
 const APP_NAME = 'PWA App';
 const APP_DEFAULT_TITLE = 'My Awesome PWA App';
@@ -55,7 +56,16 @@ export default function RootLayout({
 	return (
 		<html lang="en" className={`${GeistSans.variable}`}>
 			<body>
-				<TRPCReactProvider>{children}</TRPCReactProvider>
+				<TRPCReactProvider>
+					<ThemeProvider
+						attribute="class"
+						defaultTheme="system"
+						enableSystem
+						disableTransitionOnChange
+					>
+						{children}
+					</ThemeProvider>
+				</TRPCReactProvider>
 			</body>
 		</html>
 	);

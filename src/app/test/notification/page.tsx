@@ -1,5 +1,5 @@
 import React from 'react';
-import SendNotification from '@/components/SendNotification';
+import SendNotification from '~/components/SendNotification';
 
 const page = () => {
 	return (
