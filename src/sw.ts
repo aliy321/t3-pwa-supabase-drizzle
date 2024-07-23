@@ -1,6 +1,6 @@
-import { defaultCache } from "@serwist/next/worker";
-import type { PrecacheEntry, SerwistGlobalConfig } from "serwist";
-import { Serwist } from "serwist";
+import { defaultCache } from '@serwist/next/worker';
+import type { PrecacheEntry, SerwistGlobalConfig } from 'serwist';
+import { Serwist } from 'serwist';
 
 declare global {
 	interface WorkerGlobalScope extends SerwistGlobalConfig {
@@ -22,9 +22,9 @@ const serwist = new Serwist({
 	fallbacks: {
 		entries: [
 			{
-				url: "/~offline",
+				url: '/~offline',
 				matcher({ request }) {
-					return request.destination === "document";
+					return request.destination === 'document';
 				},
 			},
 		],
@@ -36,14 +36,14 @@ interface PushEventData {
 	message: string;
 }
 
-self.addEventListener("push", (event) => {
+self.addEventListener('push', event => {
 	let data: PushEventData;
 	try {
 		data = JSON.parse(
-			event.data?.text() ?? '{ "title": "", "message": "" }',
+			event.data?.text() ?? '{ "title": "", "message": "" }'
 		) as PushEventData;
 	} catch (error) {
-		console.error("Failed to parse push event data:", error);
+		console.error('Failed to parse push event data:', error);
 		return;
 	}
 
@@ -51,18 +51,18 @@ self.addEventListener("push", (event) => {
 		self.registration
 			.showNotification(data.title, {
 				body: data.message,
-				icon: "/icons/android-chrome-192x192.png",
+				icon: '/icons/android-chrome-192x192.png',
 			})
-			.catch((err) => console.error("Failed to show notification:", err)), // Catch any errors in showing the notification
+			.catch(err => console.error('Failed to show notification:', err)) // Catch any errors in showing the notification
 	);
 });
 
-self.addEventListener("notificationclick", (event) => {
+self.addEventListener('notificationclick', event => {
 	event.notification.close();
 	event.waitUntil(
 		self.clients
-			.matchAll({ type: "window", includeUncontrolled: true })
-			.then((clientList) => {
+			.matchAll({ type: 'window', includeUncontrolled: true })
+			.then(clientList => {
 				if (clientList.length > 0) {
 					for (const client of clientList) {
 						if (client.focused) {
@@ -71,11 +71,11 @@ self.addEventListener("notificationclick", (event) => {
 					}
 					return clientList[0]?.focus();
 				}
-				return self.clients.openWindow("/");
+				return self.clients.openWindow('/');
 			})
-			.catch((err) =>
-				console.error("Failed to handle notification click:", err),
-			),
+			.catch(err =>
+				console.error('Failed to handle notification click:', err)
+			)
 	);
 });
 

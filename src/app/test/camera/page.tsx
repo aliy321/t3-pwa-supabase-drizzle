@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react';
 
 const page = () => {
-  return <div>Camera Page</div>;
+	return <div>Camera Page</div>;
 };
 
 export default page;
