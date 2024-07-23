@@ -17,7 +17,7 @@ export default async function Home() {
 						<span className="text-[hsl(280,100%,70%)]">T3</span> App
 					</h1>
 
-					<div className="space-x-4">
+					<div className="grid grid-cols-2 space-x-4 sm:grid-cols-3 lg:grid-cols-4">
 						<Link href="/test/camera">Camera</Link>
 						<Link href="/test/notification">Notification</Link>
 					</div>
