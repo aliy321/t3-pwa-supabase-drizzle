@@ -91,6 +91,9 @@ devDependencies:
   eslint-plugin-drizzle:
     specifier: ^0.2.3
     version: 0.2.3(eslint@8.57.0)
+  husky:
+    specifier: ^9.1.1
+    version: 9.1.1
   postcss:
     specifier: ^8.4.39
     version: 8.4.39
@@ -4457,6 +4460,12 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: false
+
+  /husky@9.1.1:
+    resolution: {integrity: sha512-fCqlqLXcBnXa/TJXmT93/A36tJsjdJkibQ1MuIiFyCCYUlpYpIaj2mv1w+3KR6Rzu1IC3slFTje5f6DUp2A2rg==}
+    engines: {node: '>=18'}
+    hasBin: true
+    dev: true
 
   /idb@7.1.1:
     resolution: {integrity: sha512-gchesWBzyvGHRO9W8tzUWFDycow5gwjvFKfyV9FF32Y7F50yZMp7mP+T2mJIWFx49zicqyC4uefHM17o6xKIVQ==}
