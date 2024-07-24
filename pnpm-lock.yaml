@@ -11,6 +11,9 @@ dependencies:
     '@hookform/resolvers':
         specifier: ^3.9.0
         version: 3.9.0(react-hook-form@7.52.1)
+    '@next/third-parties':
+        specifier: ^14.2.5
+        version: 14.2.5(next@14.2.5)(react@18.3.1)
     '@radix-ui/react-accordion':
         specifier: ^1.2.0
         version: 1.2.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
@@ -143,6 +146,9 @@ dependencies:
     input-otp:
         specifier: ^1.2.4
         version: 1.2.4(react-dom@18.3.1)(react@18.3.1)
+    lenis:
+        specifier: ^1.1.6
+        version: 1.1.6(react-dom@18.3.1)(react@18.3.1)
     lucide-react:
         specifier: ^0.414.0
         version: 0.414.0(react@18.3.1)
@@ -164,12 +170,18 @@ dependencies:
     react-day-picker:
         specifier: 8.10.1
         version: 8.10.1(date-fns@3.6.0)(react@18.3.1)
+    react-device-detect:
+        specifier: ^2.2.3
+        version: 2.2.3(react-dom@18.3.1)(react@18.3.1)
     react-dom:
         specifier: ^18.3.1
         version: 18.3.1(react@18.3.1)
     react-hook-form:
         specifier: ^7.52.1
         version: 7.52.1(react@18.3.1)
+    react-ios-pwa-prompt:
+        specifier: ^2.0.6
+        version: 2.0.6(react-dom@18.3.1)(react@18.3.1)
     react-resizable-panels:
         specifier: ^2.0.22
         version: 2.0.22(react-dom@18.3.1)(react@18.3.1)
@@ -1854,6 +1866,13 @@ packages:
             to-fast-properties: 2.0.0
         dev: false
 
+    /@darkroom.engineering/tempus@0.0.46:
+        resolution:
+            {
+                integrity: sha512-s5vav3KMHYezvUCl4ee5epg0oimF6M8C9gAaKxFnFaTvX2q3ywFDryIv6XLd0mRFUt3S1uHDJqKaiEcs2ZVSvw==,
+            }
+        dev: false
+
     /@ducanh2912/next-pwa@10.2.8(next@14.2.5)(webpack@5.93.0):
         resolution:
             {
@@ -2730,6 +2749,20 @@ packages:
         requiresBuild: true
         dev: false
         optional: true
+
+    /@next/third-parties@14.2.5(next@14.2.5)(react@18.3.1):
+        resolution:
+            {
+                integrity: sha512-PDRJm8RZ3rnGNporHKjcdCeZqoW8iJ5uP0clo1Z08TqJiQzuntJ66zrGYCJyqTakx62UJNOp73YsQCFo6kbYYg==,
+            }
+        peerDependencies:
+            next: ^13.0.0 || ^14.0.0
+            react: ^18.2.0
+        dependencies:
+            next: 14.2.5(@babel/core@7.24.9)(@opentelemetry/api@1.9.0)(react-dom@18.3.1)(react@18.3.1)
+            react: 18.3.1
+            third-party-capital: 1.0.20
+        dev: false
 
     /@nodelib/fs.scandir@2.1.5:
         resolution:
@@ -9767,6 +9800,25 @@ packages:
             language-subtag-registry: 0.3.23
         dev: true
 
+    /lenis@1.1.6(react-dom@18.3.1)(react@18.3.1):
+        resolution:
+            {
+                integrity: sha512-MQE2Pz49inEsT/H6enEfYeMysH/Yl6s9Z91th1KAm3RxMDzN0YOEncZzR3o6uvJH44yCCUDnr8ILMvT8o689RA==,
+            }
+        peerDependencies:
+            react: '>=17.0.0'
+            react-dom: '>=17.0.0'
+        peerDependenciesMeta:
+            react:
+                optional: true
+            react-dom:
+                optional: true
+        dependencies:
+            '@darkroom.engineering/tempus': 0.0.46
+            react: 18.3.1
+            react-dom: 18.3.1(react@18.3.1)
+        dev: false
+
     /leven@3.1.0:
         resolution:
             {
@@ -10837,6 +10889,20 @@ packages:
             react: 18.3.1
         dev: false
 
+    /react-device-detect@2.2.3(react-dom@18.3.1)(react@18.3.1):
+        resolution:
+            {
+                integrity: sha512-buYY3qrCnQVlIFHrC5UcUoAj7iANs/+srdkwsnNjI7anr3Tt7UY6MqNxtMLlr0tMBied0O49UZVK8XKs3ZIiPw==,
+            }
+        peerDependencies:
+            react: '>= 0.14.0'
+            react-dom: '>= 0.14.0'
+        dependencies:
+            react: 18.3.1
+            react-dom: 18.3.1(react@18.3.1)
+            ua-parser-js: 1.0.38
+        dev: false
+
     /react-dom@18.3.1(react@18.3.1):
         resolution:
             {
@@ -10860,6 +10926,19 @@ packages:
             react: ^16.8.0 || ^17 || ^18 || ^19
         dependencies:
             react: 18.3.1
+        dev: false
+
+    /react-ios-pwa-prompt@2.0.6(react-dom@18.3.1)(react@18.3.1):
+        resolution:
+            {
+                integrity: sha512-slRvFlcYsOL01D8gbJW4agOQ64pk7V+0EBk+d8z8wQ40vtcaoSw/JJkh+fJQrWSfWFVvZESu3FHP0+un4YUjJg==,
+            }
+        peerDependencies:
+            react: '>=16.8.0'
+            react-dom: '>=16.8.0'
+        dependencies:
+            react: 18.3.1
+            react-dom: 18.3.1(react@18.3.1)
         dev: false
 
     /react-is@16.13.1:
@@ -11955,6 +12034,13 @@ packages:
         dependencies:
             any-promise: 1.3.0
 
+    /third-party-capital@1.0.20:
+        resolution:
+            {
+                integrity: sha512-oB7yIimd8SuGptespDAZnNkzIz+NWaJCu2RMsbs4Wmp9zSDUM8Nhi3s2OOcqYuv3mN4hitXc8DVx+LyUmbUDiA==,
+            }
+        dev: false
+
     /timers-ext@0.1.8:
         resolution:
             {
@@ -12143,6 +12229,13 @@ packages:
             }
         engines: { node: '>=14.17' }
         hasBin: true
+
+    /ua-parser-js@1.0.38:
+        resolution:
+            {
+                integrity: sha512-Aq5ppTOfvrCMgAPneW1HfWj66Xi7XL+/mIy996R1/CLS/rcyJQm6QZdsKrUeivDFQ+Oc9Wyuwor8Ze8peEoUoQ==,
+            }
+        dev: false
 
     /unbox-primitive@1.0.2:
         resolution:

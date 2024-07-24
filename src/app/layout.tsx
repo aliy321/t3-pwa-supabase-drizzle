@@ -4,7 +4,13 @@ import { GeistSans } from 'geist/font/sans';
 import { type Viewport, type Metadata } from 'next';
 
 import { TRPCReactProvider } from '~/trpc/react';
-import { ThemeProvider } from '~/components/theme-provider';
+import RootProviders from '~/components/Providers/RootProviders';
+import { HydrateClient } from '~/trpc/server';
+// import dynamic from 'next/dynamic';
+// const RootProviders = dynamic(
+// 	() => import('~/components/Providers/RootProviders'),
+// 	{ ssr: false }
+// );
 
 const APP_NAME = 'PWA App';
 const APP_DEFAULT_TITLE = 'My Awesome PWA App';
@@ -48,6 +54,12 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
 	themeColor: '#FFFFFF',
+	userScalable: false,
+	initialScale: 1,
+	minimumScale: 1,
+	maximumScale: 1,
+	width: 'device-width',
+	height: 'device-height',
 };
 
 export default function RootLayout({
@@ -57,14 +69,10 @@ export default function RootLayout({
 		<html lang="en" className={`${GeistSans.variable}`}>
 			<body>
 				<TRPCReactProvider>
-					<ThemeProvider
-						attribute="class"
-						defaultTheme="system"
-						enableSystem
-						disableTransitionOnChange
-					>
-						{children}
-					</ThemeProvider>
+					<RootProviders>
+						{/* HydrateClient is use for t3-stack */}
+						<HydrateClient>{children}</HydrateClient>
+					</RootProviders>
 				</TRPCReactProvider>
 			</body>
 		</html>
