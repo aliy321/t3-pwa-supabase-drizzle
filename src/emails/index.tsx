@@ -23,19 +23,17 @@ export default function SupaAuthVerifyEmail({
 	return (
 		<Html>
 			<Head />
-			<Preview>Supauth Email Verification</Preview>
+			<Preview>Email Verification</Preview>
 			<Body style={main}>
 				<Container style={container}>
 					<Section style={coverSection}>
 						<Section style={imageSection}></Section>
 						<Section style={upperSection}>
 							<Heading style={h1}>
-								SupaAuth Verify your email address
+								Verify your email address
 							</Heading>
 							<Text style={mainText}>
-								{
-									"Thanks for starting the new account creation process. We want to make sure it's really you. Please enter the following verification code when prompted. If you don&apos;t want to create an account, you can ignore this message."
-								}
+								{`Thanks for starting the new account creation process. We want to make sure it's really you. Please enter the following verification code when prompted. If you don't want to create an account, you can ignore this message.`}
 							</Text>
 							<Section style={verificationSection}>
 								<Text style={verifyText}>

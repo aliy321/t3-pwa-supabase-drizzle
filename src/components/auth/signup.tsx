@@ -89,15 +89,18 @@ export default function SignUp({ redirectTo }: { redirectTo: string }) {
 		};
 		// Send the POST request
 		const res = await fetch('/api/signup', requestOptions);
-		const json = await res.json();
+		const json = (await res.json()) as {
+			error: { code: string; message: string };
+		};
 		return json;
 	};
 
 	const sendVerifyEmail = async (data: z.infer<typeof FormSchema>) => {
-		const json = await postEmail({
+		const json = (await postEmail({
 			email: data.email,
 			password: data.password,
-		});
+		})) as { error: { code: string; message: string } };
+
 		if (!json.error) {
 			router.replace(
 				(pathname || '/') +

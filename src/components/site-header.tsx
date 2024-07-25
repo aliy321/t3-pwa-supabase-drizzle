@@ -6,6 +6,8 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { AlignJustify, XIcon } from 'lucide-react';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import useUser from '~/app/hook/useUser';
+import UserProfile from './auth/user-profile';
 // import { createClient } from '~/utils/supabase/client';
 
 const menuItem = [
@@ -32,7 +34,7 @@ const menuItem = [
 ];
 
 export function SiteHeader() {
-	// const supabase = createClient();
+	const { data, isFetching } = useUser();
 
 	const mobilenavbarVariant = {
 		initial: {
@@ -101,12 +103,6 @@ export function SiteHeader() {
 		};
 	}, [setHamburgerMenuIsOpen]);
 
-	// const {
-	// 	data: { user },
-	// } = await supabase.auth.getUser();
-
-	const user = null;
-
 	return (
 		<>
 			<header className="fixed left-0 top-0 z-50 w-full translate-y-[-1rem] animate-fade-in border-b opacity-0 backdrop-blur-[12px] [--animation-delay:600ms]">
@@ -115,7 +111,7 @@ export function SiteHeader() {
 						Magic UI
 					</Link>
 
-					{!user ? (
+					{!data ? (
 						<>
 							<div className="ml-auto flex h-full items-center">
 								<Link className="mr-6 text-sm" href="/sign-in">
@@ -161,6 +157,8 @@ export function SiteHeader() {
 							>
 								Go to App
 							</Link>
+
+							<UserProfile />
 						</div>
 					)}
 				</div>

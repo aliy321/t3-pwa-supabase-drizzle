@@ -1,6 +1,13 @@
 'use client';
 import React, { useState } from 'react';
-import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
+import {
+	Dialog,
+	DialogContent,
+	DialogDescription,
+	DialogHeader,
+	DialogTitle,
+	DialogTrigger,
+} from '@/components/ui/dialog';
 import { CircleUser } from 'lucide-react';
 import { cn } from '~/lib/utils';
 import useUser from '~/app/hook/useUser';
@@ -8,6 +15,7 @@ import { MdOutlineMarkEmailRead } from 'react-icons/md';
 import { FaGithub, FaDiscord } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
 import Avatar from './avatar';
+import * as VisuallyHidden from '@radix-ui/react-visually-hidden';
 
 export type IconKey = 'email' | 'github' | 'discord' | 'google';
 
@@ -39,7 +47,16 @@ export default function ManageProfile() {
 			<DialogTrigger asChild>
 				<button id="manage-profile"></button>
 			</DialogTrigger>
-			<DialogContent className="flex w-full flex-col sm:flex-row md:w-[55rem]">
+			<DialogContent className="flex w-full max-w-full flex-col sm:flex-row md:w-[55rem]">
+				<DialogHeader>
+					<VisuallyHidden.Root>
+						<DialogTitle>Are you absolutely sure?</DialogTitle>
+						<DialogDescription>
+							This action cannot be undone. Are you sure you want
+							to permanently delete this file from our servers?
+						</DialogDescription>
+					</VisuallyHidden.Root>
+				</DialogHeader>
 				<div className="h-[100%] w-60 space-y-7 rounded-s-lg p-5">
 					<div>
 						<h1 className="text-2xl font-bold">Account</h1>

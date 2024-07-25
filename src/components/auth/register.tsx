@@ -30,14 +30,14 @@ export default function Register() {
 						Welcome! Please fill in the details to get started.
 					</p>
 				</div>
-				<Social redirectTo={next || '/'} />
+				<Social redirectTo={next ?? '/'} />
 				<div className="flex items-center gap-5">
 					<div className="h-[0.5px] w-full flex-1 bg-zinc-400 dark:bg-zinc-800"></div>
 					<div className="text-sm">or</div>
 					<div className="h-[0.5px] w-full flex-1 bg-zinc-400 dark:bg-zinc-800"></div>
 				</div>
 			</div>
-			<SignUp redirectTo={next || '/'} />
+			<SignUp redirectTo={next ?? '/'} />
 		</div>
 	);
 }
