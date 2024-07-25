@@ -8,6 +8,7 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import useUser from '~/app/hook/useUser';
 import UserProfile from './auth/user-profile';
+import { Skeleton } from './ui/skeleton';
 // import { createClient } from '~/utils/supabase/client';
 
 const menuItem = [
@@ -35,6 +36,7 @@ const menuItem = [
 
 export function SiteHeader() {
 	const { data, isFetching } = useUser();
+	console.log(data);
 
 	const mobilenavbarVariant = {
 		initial: {
@@ -111,10 +113,14 @@ export function SiteHeader() {
 						Magic UI
 					</Link>
 
-					{!data ? (
+					{isFetching ? (
+						<div className="flex items-center space-x-4">
+							<Skeleton className="h-8 w-8 rounded-full" />
+						</div>
+					) : !data || Object.keys(data).length === 0 ? (
 						<>
 							<div className="ml-auto flex h-full items-center">
-								<Link className="mr-6 text-sm" href="/sign-in">
+								<Link className="mr-6 text-sm" href="/signin">
 									Log in
 								</Link>
 								<Link
@@ -124,7 +130,7 @@ export function SiteHeader() {
 										}),
 										'mr-6 text-sm'
 									)}
-									href="/sign-up"
+									href="/register"
 								>
 									Sign up
 								</Link>

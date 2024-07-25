@@ -75,7 +75,7 @@ export default function UserProfile() {
 									) : (
 										<AiOutlineLoading3Quarters className="size-4 animate-spin" />
 									)}
-									SignOut
+									Sign Out
 								</Button>
 							</div>
 						</div>

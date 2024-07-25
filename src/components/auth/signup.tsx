@@ -307,7 +307,9 @@ export default function SignUp({ redirectTo }: { redirectTo: string }) {
 									otp: value,
 									type: 'email',
 								});
-								const { error } = JSON.parse(res);
+								const { error } = JSON.parse(res) as {
+									error: unknown;
+								};
 								if (error) {
 									setVerifyStatus('failed');
 								} else {
@@ -364,7 +366,7 @@ export default function SignUp({ redirectTo }: { redirectTo: string }) {
 											);
 											form.setValue(
 												'email',
-												existEmail || ''
+												existEmail ?? ''
 											);
 											form.setValue('password', '');
 											setIsConfirmed(false);
