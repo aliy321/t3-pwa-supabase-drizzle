@@ -3,17 +3,17 @@ import { CardCarousel } from '~/components/app/CardCarousel';
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
 
 import { Separator } from '~/components/ui/separator';
-import { createClient } from '~/lib/supabase/server';
+// import { createClient } from '~/utils/supabase/server';
 
 export default async function PrivatePage() {
-	const supabase = createClient();
+	// const supabase = createClient();
 
-	const { data, error } = await supabase.auth.getUser();
-	console.log('app page:', data, error);
+	// const { data, error } = await supabase.auth.getUser();
+	// console.log('app page:', data, error);
 
-	if (error ?? !data?.user) {
-		redirect('/sign-in');
-	}
+	// if (error ?? !data?.user) {
+	// 	redirect('/sign-in');
+	// }
 
 	// return <p>Hello {data?.user?.email}</p>;
 	return (

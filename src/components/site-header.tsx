@@ -6,7 +6,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { AlignJustify, XIcon } from 'lucide-react';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { createClient } from '~/lib/supabase/client';
+// import { createClient } from '~/utils/supabase/client';
 
 const menuItem = [
 	{
@@ -31,7 +31,7 @@ const menuItem = [
 	},
 ];
 
-export async function SiteHeader() {
+export function SiteHeader() {
 	// const supabase = createClient();
 
 	const mobilenavbarVariant = {

@@ -11,7 +11,6 @@ import superjson from 'superjson';
 import { ZodError } from 'zod';
 
 import { db } from '~/server/db';
-import { createClient } from '~/lib/supabase/server';
 
 /**
  * 1. CONTEXT
@@ -28,7 +27,6 @@ import { createClient } from '~/lib/supabase/server';
 export const createTRPCContext = async (opts: { headers: Headers }) => {
 	return {
 		db,
-		supabase: createClient(),
 		...opts,
 	};
 };

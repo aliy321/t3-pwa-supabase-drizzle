@@ -74,10 +74,10 @@ import {
 
 import { redirect } from 'next/navigation';
 
-import { createClient } from '~/lib/supabase/server';
+import { createSupabaseServer } from '~/utils/supabase/server';
 
 export default async function PrivatePage() {
-	const supabase = createClient();
+	const supabase = createSupabaseServer();
 
 	const {
 		data: { user },

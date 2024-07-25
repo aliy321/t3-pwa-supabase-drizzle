@@ -1,6 +1,15 @@
 import { createServerClient } from '@supabase/ssr';
 import { NextResponse, type NextRequest } from 'next/server';
 
+const publicPaths = [
+	'/',
+	'/about',
+	'/contact',
+	'/login',
+	'/auth',
+	// Add other public paths here
+];
+
 export async function updateSession(request: NextRequest) {
 	let supabaseResponse = NextResponse.next({
 		request,
@@ -32,17 +41,16 @@ export async function updateSession(request: NextRequest) {
 	// IMPORTANT: Avoid writing any logic between createServerClient and
 	// supabase.auth.getUser(). A simple mistake could make it very hard to debug
 	// issues with users being randomly logged out.
+	// Get the current user session
 
 	const {
 		data: { user },
 	} = await supabase.auth.getUser();
 
-	if (
-		!user &&
-		!request.nextUrl.pathname.startsWith('/login') &&
-		!request.nextUrl.pathname.startsWith('/auth')
-	) {
-		// no user, potentially respond by redirecting the user to the login page
+	const isPublicPath = publicPaths.includes(request.nextUrl.pathname);
+	const isApiRequest = request.nextUrl.pathname.startsWith('/api');
+
+	if (!user && !isPublicPath && !isApiRequest) {
 		const url = request.nextUrl.clone();
 		url.pathname = '/login';
 		return NextResponse.redirect(url);

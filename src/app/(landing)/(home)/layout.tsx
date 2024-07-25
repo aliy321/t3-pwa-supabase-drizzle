@@ -1,8 +1,12 @@
-import React from 'react';
-import LandingProviders from '~/components/Providers/LandingProviders';
-import { SiteBanner } from '~/components/site-banner';
-import { SiteFooter } from '~/components/site-footer';
-import { SiteHeader } from '~/components/site-header';
+import React, { Suspense } from 'react';
+import { SiteBanner } from '@/components/site-banner';
+import { SiteFooter } from '@/components/site-footer';
+import { SiteHeader } from '@/components/site-header';
+import dynamic from 'next/dynamic';
+const LandingProviders = dynamic(
+	() => import('~/components/Providers/LandingProviders'),
+	{ ssr: false }
+);
 
 type Props = {
 	children: React.ReactNode;
@@ -10,12 +14,16 @@ type Props = {
 
 const layout = ({ children }: Props) => {
 	return (
-		<LandingProviders>
-			{/* <SiteBanner /> */}
-			<SiteHeader />
-			<main className="mx-auto flex-1 overflow-hidden">{children}</main>
-			<SiteFooter />
-		</LandingProviders>
+		<Suspense fallback={null}>
+			<LandingProviders>
+				{/* <SiteBanner /> */}
+				<SiteHeader />
+				<main className="mx-auto flex-1 overflow-hidden">
+					{children}
+				</main>
+				<SiteFooter />
+			</LandingProviders>
+		</Suspense>
 	);
 };
 

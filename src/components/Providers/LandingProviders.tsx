@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { Suspense } from 'react';
 import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google';
 import { ReactLenis } from 'lenis/react';
 import type { LenisOptions } from 'lenis';
@@ -23,12 +23,14 @@ const LandingProviders = ({ children }: Props) => {
 	};
 
 	return (
-		<ReactLenis root options={lenis}>
-			{children}
+		<Suspense fallback={null}>
+			<ReactLenis root options={lenis}>
+				{children}
 
-			{gtmId && <GoogleTagManager gtmId={gtmId} />}
-			{gaId && <GoogleAnalytics gaId={gaId} />}
-		</ReactLenis>
+				{gtmId && <GoogleTagManager gtmId={gtmId} />}
+				{gaId && <GoogleAnalytics gaId={gaId} />}
+			</ReactLenis>
+		</Suspense>
 	);
 };
 
