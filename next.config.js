@@ -26,7 +26,15 @@ const withSerwist = withSerwistInit({
 export default withSentryConfig(
 	withSerwist({
 		// Your Next.js config
-		reactStrictMode: true,
+		reactStrictMode: false,
+		images: {
+			remotePatterns: [
+				{
+					protocol: 'https',
+					hostname: 'images.unsplash.com',
+				},
+			],
+		},
 	}),
 	{
 		// For all available options, see:

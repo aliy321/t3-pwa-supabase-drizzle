@@ -2,11 +2,11 @@
 
 import React, { useEffect, useState } from 'react';
 import { ThemeProvider } from './theme-provider';
-import PWAPrompt from 'react-ios-pwa-prompt';
 import { isIOS } from 'react-device-detect';
 import { getItemWithExpiry, setItemWithExpiry } from '~/lib/locale-storage';
 import ScreenSize from '../Responsive';
-import { HydrateClient } from '~/trpc/server';
+import PWAPrompt from 'react-ios-pwa-prompt';
+import { Toaster } from 'sonner';
 
 type Props = {
 	children: React.ReactNode;
@@ -69,6 +69,7 @@ const RootProviders = ({ children }: Props) => {
 				appIconPath="/icons/android-chrome-192x192.png"
 			/>
 			<ScreenSize />
+			<Toaster position="bottom-right" richColors closeButton />
 		</ThemeProvider>
 	);
 };

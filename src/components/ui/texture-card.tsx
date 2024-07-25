@@ -67,7 +67,7 @@ const TextureCardHeader = React.forwardRef<
 	<div
 		ref={ref}
 		className={cn(
-			'first:pt-6 last:pb-6', // Adjust padding for first and last child
+			'px-6 py-4 first:pt-6 last:pb-6', // Adjust padding for first and last child
 			className
 		)}
 		{...props}
@@ -82,7 +82,7 @@ const TextureCardTitle = React.forwardRef<
 	<h3
 		ref={ref}
 		className={cn(
-			'pl-2 text-lg font-semibold leading-tight text-neutral-900 dark:text-neutral-100',
+			'text-lg font-semibold leading-tight text-neutral-900 dark:text-neutral-100',
 			className
 		)}
 		{...props}
@@ -97,7 +97,7 @@ const TextureCardDescription = React.forwardRef<
 	<p
 		ref={ref}
 		className={cn(
-			'pl-2 text-sm text-neutral-600 dark:text-neutral-400',
+			'text-sm text-neutral-600 dark:text-neutral-400',
 			className
 		)}
 		{...props}

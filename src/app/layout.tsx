@@ -4,18 +4,19 @@ import { GeistSans } from 'geist/font/sans';
 import { type Viewport, type Metadata } from 'next';
 
 import { TRPCReactProvider } from '~/trpc/react';
-import RootProviders from '~/components/Providers/RootProviders';
 import { HydrateClient } from '~/trpc/server';
-// import dynamic from 'next/dynamic';
-// const RootProviders = dynamic(
-// 	() => import('~/components/Providers/RootProviders'),
-// 	{ ssr: false }
-// );
+import dynamic from 'next/dynamic';
+// import RootProviders from '~/components/Providers/RootProviders';
+const RootProviders = dynamic(
+	() => import('~/components/Providers/RootProviders'),
+	{ ssr: false }
+);
 
-const APP_NAME = 'PWA App';
-const APP_DEFAULT_TITLE = 'My Awesome PWA App';
-const APP_TITLE_TEMPLATE = '%s - PWA App';
-const APP_DESCRIPTION = 'Best PWA app in the world!';
+const APP_NAME = 'One Tap Tutor';
+const APP_DEFAULT_TITLE = 'Fulfilment is only one tap away.';
+const APP_TITLE_TEMPLATE = `%s - ${APP_NAME}`;
+const APP_DESCRIPTION =
+	'Every lesson you deliver is an opportunity to change lives. With One Tap Tutor, make meaningful impacts, one student at a time.';
 
 export const metadata: Metadata = {
 	applicationName: APP_NAME,
@@ -67,7 +68,7 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
 	return (
 		<html lang="en" className={`${GeistSans.variable}`}>
-			<body>
+			<body className="size-full min-h-svh">
 				<TRPCReactProvider>
 					<RootProviders>
 						{/* HydrateClient is use for t3-stack */}
