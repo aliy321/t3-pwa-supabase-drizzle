@@ -10,6 +10,7 @@ import useUser from '~/hook/useUser';
 import UserProfile from './auth/user-profile';
 import { Skeleton } from './ui/skeleton';
 // import { createClient } from '~/utils/supabase/client';
+import { Link as ViewLink } from 'next-view-transitions';
 
 const menuItem = [
 	{
@@ -108,9 +109,12 @@ export function SiteHeader() {
 		<>
 			<header className="fixed left-0 top-0 z-50 w-full translate-y-[-1rem] animate-fade-in border-b opacity-0 backdrop-blur-[12px] [--animation-delay:600ms]">
 				<div className="container flex h-[3.5rem] items-center justify-between">
-					<Link className="text-md flex items-center" href="/">
+					<ViewLink className="text-md flex items-center" href="/">
 						Magic UI
-					</Link>
+					</ViewLink>
+
+					{/* <ViewLink href='/about'>Go to /about</ViewLink>
+					<ViewLink href='/projects'>Go to /projects</ViewLink> */}
 
 					{isFetching ? (
 						<div className="flex items-center space-x-4">
@@ -119,10 +123,13 @@ export function SiteHeader() {
 					) : !data || Object.keys(data).length === 0 ? (
 						<>
 							<div className="ml-auto flex h-full items-center">
-								<Link className="mr-6 text-sm" href="/signin">
+								<ViewLink
+									className="mr-6 text-sm"
+									href="/signin"
+								>
 									Log in
-								</Link>
-								<Link
+								</ViewLink>
+								<ViewLink
 									className={cn(
 										buttonVariants({
 											variant: 'secondary',
@@ -132,7 +139,7 @@ export function SiteHeader() {
 									href="/register"
 								>
 									Sign up
-								</Link>
+								</ViewLink>
 							</div>
 
 							<button
@@ -151,7 +158,7 @@ export function SiteHeader() {
 						</>
 					) : (
 						<div className="ml-auto flex h-full items-center">
-							<Link
+							<ViewLink
 								href="/app"
 								className={cn(
 									buttonVariants({
@@ -161,7 +168,7 @@ export function SiteHeader() {
 								)}
 							>
 								Go to App
-							</Link>
+							</ViewLink>
 
 							<UserProfile />
 						</div>
@@ -182,9 +189,12 @@ export function SiteHeader() {
 					)}
 				>
 					<div className="container flex h-[3.5rem] items-center justify-between">
-						<Link className="text-md flex items-center" href="/">
+						<ViewLink
+							className="text-md flex items-center"
+							href="/"
+						>
 							Magic UI
-						</Link>
+						</ViewLink>
 
 						<button
 							className="ml-6 md:hidden"
@@ -208,7 +218,7 @@ export function SiteHeader() {
 								key={item.id}
 								className="border-grey-dark border-b py-0.5 pl-6 md:border-none"
 							>
-								<Link
+								<ViewLink
 									className={`hover:text-grey flex h-[var(--navigation-height)] w-full items-center text-xl transition-[color,transform] duration-300 md:translate-y-0 md:text-sm md:transition-colors ${
 										hamburgerMenuIsOpen
 											? '[&_a]:translate-y-0'
@@ -217,7 +227,7 @@ export function SiteHeader() {
 									href={item.href}
 								>
 									{item.label}
-								</Link>
+								</ViewLink>
 							</motion.li>
 						))}
 					</motion.ul>

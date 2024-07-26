@@ -1,14 +1,16 @@
 import '~/styles/globals.css';
 
-import { app_config } from '~/config';
 import { GeistSans } from 'geist/font/sans';
-import { type Viewport, type Metadata } from 'next';
+import { type Metadata, type Viewport } from 'next';
+import { app_config } from '~/config';
 
+import { ViewTransitions } from 'next-view-transitions';
+import dynamic from 'next/dynamic';
+import { headers } from 'next/headers';
+import { generateDynamicMetadata, type MetadataOptions } from '~/lib/metadata';
 import { TRPCReactProvider } from '~/trpc/react';
 import { HydrateClient } from '~/trpc/server';
-import dynamic from 'next/dynamic';
-import { generateDynamicMetadata, type MetadataOptions } from '~/lib/metadata';
-import { headers } from 'next/headers';
+import { cn } from '~/lib/utils';
 const RootProviders = dynamic(
 	() => import('~/components/Providers/RootProviders'),
 	{ ssr: false }
@@ -50,19 +52,21 @@ export default function RootLayout({
 	children,
 }: Readonly<{ children: React.ReactNode }>) {
 	return (
-		<html
-			lang="en"
-			className={`${GeistSans.variable}`}
-			suppressHydrationWarning
-		>
-			<body className="size-full min-h-svh">
-				<TRPCReactProvider>
-					<RootProviders>
-						{/* HydrateClient is use for t3-stack */}
-						<HydrateClient>{children}</HydrateClient>
-					</RootProviders>
-				</TRPCReactProvider>
-			</body>
-		</html>
+		<ViewTransitions>
+			<html
+				lang="en"
+				className={cn(`${GeistSans.variable}`, 'h-full')}
+				suppressHydrationWarning
+			>
+				<body className="size-full min-h-svh">
+					<TRPCReactProvider>
+						<RootProviders>
+							{/* HydrateClient is use for t3-stack */}
+							<HydrateClient>{children}</HydrateClient>
+						</RootProviders>
+					</TRPCReactProvider>
+				</body>
+			</html>
+		</ViewTransitions>
 	);
 }
