@@ -13,11 +13,11 @@ Checklist
 
 -   [x] Add Resend
 
--   [ ] Detect user currently on the page or left
-
--   [ ] Fix sitemap, robots, error, not found etc. pages
+-   [x] Fix sitemap, robots, error, not found etc. pages
 
 -   [ ] Add view transition
+
+-   [ ] Detect user currently on the page or left
 
 -   [ ] Trigger default system prompt
 
