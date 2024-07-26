@@ -12,6 +12,11 @@ export const env = createEnv({
 			.enum(['development', 'test', 'production'])
 			.default('development'),
 		SUPABASE_SERVICE_KEY: z.string().min(1),
+		WEB_PUSH_PRIVATE_KEY: z.string().min(1),
+		WEB_PUSH_EMAIL: z.string().email(),
+		SENTRY_AUTH_TOKEN: z.string().min(1),
+		RESEND_API_KEY: z.string().min(1),
+		RESEND_DOMAIN: z.string().min(1),
 	},
 
 	/**
@@ -23,6 +28,8 @@ export const env = createEnv({
 		// NEXT_PUBLIC_CLIENTVAR: z.string(),
 		NEXT_PUBLIC_SUPABASE_URL: z.string().url(),
 		NEXT_PUBLIC_SUPABASE_ANON_KEY: z.string().min(1),
+		NEXT_PUBLIC_WEB_PUSH_PUBLIC_KEY: z.string().min(1),
+		NEXT_PUBLIC_BASE_URL: z.string().optional(),
 	},
 
 	/**
@@ -37,6 +44,14 @@ export const env = createEnv({
 		NEXT_PUBLIC_SUPABASE_ANON_KEY:
 			process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
 		SUPABASE_SERVICE_KEY: process.env.SUPABASE_SERVICE_KEY,
+		WEB_PUSH_PRIVATE_KEY: process.env.WEB_PUSH_PRIVATE_KEY,
+		WEB_PUSH_EMAIL: process.env.WEB_PUSH_EMAIL,
+		NEXT_PUBLIC_WEB_PUSH_PUBLIC_KEY:
+			process.env.NEXT_PUBLIC_WEB_PUSH_PUBLIC_KEY,
+		SENTRY_AUTH_TOKEN: process.env.SENTRY_AUTH_TOKEN,
+		RESEND_API_KEY: process.env.RESEND_API_KEY,
+		RESEND_DOMAIN: process.env.RESEND_DOMAIN,
+		NEXT_PUBLIC_BASE_URL: process.env.NEXT_PUBLIC_BASE_URL,
 	},
 	/**
 	 * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially

@@ -1,6 +1,33 @@
 # Create T3 App
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+### This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.\
+
+\
+Checklist
+
+-   [x] Create Pwa Pop up
+
+-   [x] Use supabase auth
+
+-   [x] Created Protected Route
+
+-   [x] Add Resend
+
+-   [ ] Detect user currently on the page or left
+
+-   [ ] Fix sitemap, robots, error, not found etc. pages
+
+-   [ ] Add view transition
+
+-   [ ] Trigger default system prompt
+
+    -   [ ] Push Notification
+
+    -   [ ] Location
+
+    -   [ ]
+
+-   [ ] Database Schema
 
 ## What's next? How do I make an app with this?
 

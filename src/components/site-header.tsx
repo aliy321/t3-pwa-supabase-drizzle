@@ -6,7 +6,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { AlignJustify, XIcon } from 'lucide-react';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import useUser from '~/app/hook/useUser';
+import useUser from '~/hook/useUser';
 import UserProfile from './auth/user-profile';
 import { Skeleton } from './ui/skeleton';
 // import { createClient } from '~/utils/supabase/client';
@@ -36,7 +36,6 @@ const menuItem = [
 
 export function SiteHeader() {
 	const { data, isFetching } = useUser();
-	console.log(data);
 
 	const mobilenavbarVariant = {
 		initial: {
