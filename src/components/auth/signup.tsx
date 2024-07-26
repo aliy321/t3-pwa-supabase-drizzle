@@ -29,7 +29,7 @@ import Link from 'next/link';
 import { cn } from '~/lib/utils';
 import { toast } from 'sonner';
 import { usePathname, useRouter } from 'next/navigation';
-import { verifyOtp } from '~/app/(auth)/actions/auth';
+import { verifyOtp } from '~/app/(pages)/(auth)/actions/auth';
 
 const FormSchema = z
 	.object({

@@ -24,6 +24,8 @@ import { toast } from 'sonner';
 import { createSupabaseBrowser } from '~/utils/supabase/client';
 import { cn } from '~/lib/utils';
 import Link from 'next/link';
+import { app_config } from '~/config';
+import Logo from '@/components/Logo';
 
 const FormSchema = z.object({
 	email: z.string().email({ message: 'Invalid Email Address' }),
@@ -42,14 +44,10 @@ export default function SignIn() {
 		<div className="w-full rounded-md border shadow dark:border-zinc-800 sm:w-[26rem] sm:p-5">
 			<div className="space-y-5 p-5">
 				<div className="space-y-3 text-center">
-					<Image
-						src={'/supabase.png'}
-						alt="supabase logo"
-						width={50}
-						height={50}
-						className="mx-auto rounded-full"
-					/>
-					<h1 className="font-bold">Sign in to SupaAuth</h1>
+					<div className="flex items-center justify-center">
+						<Logo />
+					</div>
+					<h1 className="font-bold">Sign in to {app_config.name}</h1>
 					<p className="text-sm">
 						Welcome back! Please sign in to continue
 					</p>

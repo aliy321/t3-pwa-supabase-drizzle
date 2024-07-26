@@ -63,11 +63,13 @@ const RootProviders = ({ children }: Props) => {
 			disableTransitionOnChange
 		>
 			{children}
-			<PWAPrompt
-				isShown={shouldShowPWAPrompt}
-				onClose={handlePromptClose}
-				appIconPath="/icons/android-chrome-192x192.png"
-			/>
+			{isIOS && (
+				<PWAPrompt
+					isShown={shouldShowPWAPrompt}
+					onClose={handlePromptClose}
+					appIconPath="/icons/android-chrome-192x192.png"
+				/>
+			)}
 			<ScreenSize />
 			<Toaster position="bottom-right" richColors closeButton />
 		</ThemeProvider>

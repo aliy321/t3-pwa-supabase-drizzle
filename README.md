@@ -1,6 +1,6 @@
 # Create T3 App
 
-### This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.\
+### This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
 
 \
 Checklist
@@ -25,9 +25,17 @@ Checklist
 
     -   [ ] Location
 
-    -   [ ]
+    -   [ ] \[ \]
 
 -   [ ] Database Schema
+
+## Logo
+
+To change logo, check `"/component/logo.tsx"` to update the svg. All usage for logo should be centralized for easier changes.
+
+## OG Image
+
+To change og image, check `"/public/opengraph-image.png"` and replace with new one, take note to keep the same name.
 
 ## What's next? How do I make an app with this?
 
