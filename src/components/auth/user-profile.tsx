@@ -29,7 +29,7 @@ export default function UserProfile() {
 			await supabase.auth.signOut();
 			await queryClient.invalidateQueries({ queryKey: ['user'] });
 
-			router.push('/signin');
+			router.push('/');
 		});
 	};
 

@@ -7,6 +7,8 @@ import { getItemWithExpiry, setItemWithExpiry } from '~/lib/locale-storage';
 import ScreenSize from '../Responsive';
 import PWAPrompt from 'react-ios-pwa-prompt';
 import { Toaster } from 'sonner';
+import { ReactLenis } from 'lenis/react';
+import type { LenisOptions } from 'lenis';
 
 type Props = {
 	children: React.ReactNode;
@@ -55,6 +57,13 @@ const RootProviders = ({ children }: Props) => {
 		setItemWithExpiry('pwaPromptShown', 'true', 7 * 24 * 60 * 60 * 1000);
 	};
 
+	const lenis: LenisOptions = {
+		lerp: 0.115,
+		easing: (t: number) => {
+			return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+		},
+	};
+
 	return (
 		<ThemeProvider
 			attribute="class"
@@ -62,7 +71,9 @@ const RootProviders = ({ children }: Props) => {
 			enableSystem
 			disableTransitionOnChange
 		>
-			{children}
+			<ReactLenis root options={lenis}>
+				{children}
+			</ReactLenis>
 			{isIOS && (
 				<PWAPrompt
 					isShown={shouldShowPWAPrompt}

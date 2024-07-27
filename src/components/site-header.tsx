@@ -125,7 +125,7 @@ export function SiteHeader() {
 							<div className="ml-auto flex h-full items-center">
 								<ViewLink
 									className="mr-6 text-sm"
-									href="/signin"
+									href="/sign-in"
 								>
 									Log in
 								</ViewLink>
@@ -136,7 +136,7 @@ export function SiteHeader() {
 										}),
 										'mr-6 text-sm'
 									)}
-									href="/register"
+									href="/sign-up"
 								>
 									Sign up
 								</ViewLink>

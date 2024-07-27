@@ -2,8 +2,17 @@
 import React from 'react';
 import SignUp from './signup';
 import Social from './social';
-import Image from 'next/image';
 import { useSearchParams } from 'next/navigation';
+import TextureCard, {
+	TextureCardContent,
+	TextureCardDescription,
+	TextureCardHeader,
+	TextureCardTitle,
+	TextureSeparator,
+} from '@/components/ui/texture-card';
+import Logo from '../Logo';
+import { DevLoginButtons } from '~/app/(pages)/(auth)/_component/DevLoginButtons';
+import { Link } from 'next-view-transitions';
 
 export default function Register() {
 	const queryString =
@@ -15,29 +24,55 @@ export default function Register() {
 	const verify = urlParams.get('verify');
 
 	return (
-		<div className="w-full rounded-md border shadow dark:border-zinc-800 sm:w-[26rem] sm:p-5">
-			<div className="space-y-5 p-5">
-				<div className="space-y-3 text-center">
-					<Image
-						src={'/supabase.png'}
-						alt="supabase logo"
-						width={50}
-						height={50}
-						className="mx-auto rounded-full"
-					/>
-					<h1 className="font-bold">Create Account</h1>
-					<p className="text-sm">
+		<div className="flex flex-col gap-6">
+			<TextureCard className="">
+				<TextureCardHeader className="space-y-3 text-center">
+					<div className="space-y-3 text-center">
+						<div className="flex items-center justify-center">
+							<Link href="/" className="cursor-pointer">
+								<Logo />
+							</Link>
+						</div>
+					</div>
+					<TextureCardTitle className="text-xl">
+						Create Account
+					</TextureCardTitle>
+					<TextureCardDescription>
 						Welcome! Please fill in the details to get started.
-					</p>
-				</div>
-				<Social redirectTo={next ?? '/'} />
-				<div className="flex items-center gap-5">
-					<div className="h-[0.5px] w-full flex-1 bg-zinc-400 dark:bg-zinc-800"></div>
-					<div className="text-sm">or</div>
-					<div className="h-[0.5px] w-full flex-1 bg-zinc-400 dark:bg-zinc-800"></div>
-				</div>
-			</div>
-			<SignUp redirectTo={next ?? '/'} />
+					</TextureCardDescription>
+				</TextureCardHeader>
+				<TextureCardContent className="space-y-4">
+					<Social redirectTo={next ?? '/'} />
+
+					<div className="flex items-center gap-4">
+						<div className="w-full">
+							<TextureSeparator />
+						</div>
+						<div className="text-sm">or</div>
+						<div className="w-full">
+							<TextureSeparator />
+						</div>
+					</div>
+
+					<SignUp redirectTo={next ?? '/'} />
+				</TextureCardContent>
+			</TextureCard>
+
+			{process.env.NEXT_PUBLIC_VERCEL_ENV !== 'production' && (
+				<TextureCard className="mx-auto w-full text-center">
+					<TextureCardHeader>
+						<TextureCardTitle className="text-xl">
+							Dev Tool
+						</TextureCardTitle>
+						<TextureCardDescription>
+							Quick login for development
+						</TextureCardDescription>
+					</TextureCardHeader>
+					<TextureCardContent>
+						<DevLoginButtons />
+					</TextureCardContent>
+				</TextureCard>
+			)}
 		</div>
 	);
 }

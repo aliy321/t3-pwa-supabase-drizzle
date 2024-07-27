@@ -15,6 +15,17 @@ import {
 export function ModeToggle() {
 	const { setTheme } = useTheme();
 
+	const toggleTheme = (theme: string) => {
+		if (!document.startViewTransition) {
+			// Fallback if the View Transition API is not supported
+			setTheme(theme);
+			return;
+		}
+
+		// Use the View Transition API to smoothly change the theme
+		document.startViewTransition(() => setTheme(theme));
+	};
+
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
@@ -25,13 +36,13 @@ export function ModeToggle() {
 				</Button>
 			</DropdownMenuTrigger>
 			<DropdownMenuContent align="end">
-				<DropdownMenuItem onClick={() => setTheme('light')}>
+				<DropdownMenuItem onClick={() => toggleTheme('light')}>
 					Light
 				</DropdownMenuItem>
-				<DropdownMenuItem onClick={() => setTheme('dark')}>
+				<DropdownMenuItem onClick={() => toggleTheme('dark')}>
 					Dark
 				</DropdownMenuItem>
-				<DropdownMenuItem onClick={() => setTheme('system')}>
+				<DropdownMenuItem onClick={() => toggleTheme('system')}>
 					System
 				</DropdownMenuItem>
 			</DropdownMenuContent>

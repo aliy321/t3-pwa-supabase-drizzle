@@ -5,6 +5,8 @@ import { FcGoogle } from 'react-icons/fc';
 // import { IoLogoGithub } from 'react-icons/io5';
 import { createSupabaseBrowser } from '~/utils/supabase/client';
 import { getBaseUrl } from '~/lib/utils';
+import { TextureButton } from '../ui/texture-button';
+import { IoLogoGithub } from 'react-icons/io';
 
 export default function Social({ redirectTo }: { redirectTo: string }) {
 	const loginWithProvider = async (provider: 'github' | 'google') => {
@@ -21,22 +23,18 @@ export default function Social({ redirectTo }: { redirectTo: string }) {
 
 	return (
 		<div className="flex w-full gap-2">
-			{/* <Button
-				className="flex h-8 w-full items-center gap-5"
-				variant="outline"
-				onClick={() => loginWithProvider('github')}
-			>
-				<IoLogoGithub />
-				Github
-			</Button> */}
-			<Button
-				className="flex h-8 w-full items-center gap-2"
-				variant="outline"
+			<TextureButton
+				variant="secondary"
 				onClick={() => loginWithProvider('google')}
 			>
-				<FcGoogle />
-				Google
-			</Button>
+				<FcGoogle className="mr-2" /> Google
+			</TextureButton>
+			{/* <TextureButton
+				variant="secondary"
+				onClick={() => loginWithProvider('github')}
+			>
+				<IoLogoGithub className="mr-2" /> Github
+			</TextureButton> */}
 		</div>
 	);
 }

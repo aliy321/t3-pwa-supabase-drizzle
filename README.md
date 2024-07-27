@@ -15,7 +15,11 @@ Checklist
 
 -   [x] Fix sitemap, robots, error, not found etc. pages
 
--   [ ] Add view transition
+-   [x] Add view transition
+
+-   [ ] Add Stripe
+
+-   [ ] Re-structure UI layers - header/footer for app and dashboard
 
 -   [ ] Detect user currently on the page or left
 

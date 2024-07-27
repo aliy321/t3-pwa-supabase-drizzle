@@ -8,10 +8,11 @@ type Props = {
 
 const layout = ({ children }: Props) => {
 	return (
+		// [view-transition-name:toggle]
 		<div className="space-y-4">
 			<Header />
-			<main className="min-h-svh">{children}</main>
-			<Footer />
+			<main className="m-8 min-h-svh">{children}</main>
+			{/* <Footer /> */}
 		</div>
 	);
 };

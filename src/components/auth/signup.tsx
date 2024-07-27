@@ -3,7 +3,6 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa6';
 import { RiArrowRightSFill, RiArrowDropLeftFill } from 'react-icons/ri';
 import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 import { SiMinutemailer } from 'react-icons/si';
@@ -14,7 +13,6 @@ import {
 	InputOTPSeparator,
 	InputOTPSlot,
 } from '@/components/ui/input-otp';
-import { Button } from '@/components/ui/button';
 import {
 	Form,
 	FormControl,
@@ -25,11 +23,14 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { useState, useTransition } from 'react';
-import Link from 'next/link';
+import { Link } from 'next-view-transitions';
 import { cn } from '~/lib/utils';
 import { toast } from 'sonner';
 import { usePathname, useRouter } from 'next/navigation';
 import { verifyOtp } from '~/app/(pages)/(auth)/actions/auth';
+import { TextureButton } from '../ui/texture-button';
+import { Toggle } from '../ui/toggle';
+import { Eye, EyeOff } from 'lucide-react';
 
 const FormSchema = z
 	.object({
@@ -40,7 +41,7 @@ const FormSchema = z
 	.refine(
 		data => {
 			if (data['confirm-pass'] !== data.password) {
-				console.log('running');
+				// console.log('running');
 				return false;
 			} else {
 				return true;
@@ -62,6 +63,7 @@ export default function SignUp({ redirectTo }: { redirectTo: string }) {
 	const [verifyStatus, setVerifyStatus] = useState<string>('');
 	const [isPending, startTransition] = useTransition();
 	const [isSendAgain, startSendAgain] = useTransition();
+	const [otpValue, setOtpValue] = useState('');
 	const pathname = usePathname();
 	const router = useRouter();
 	const form = useForm<z.infer<typeof FormSchema>>({
@@ -132,15 +134,16 @@ export default function SignUp({ redirectTo }: { redirectTo: string }) {
 
 	return (
 		<div
-			className={`items-center space-x-5 overflow-hidden whitespace-nowrap p-5 align-top ${
+			className={cn(
+				`items-center space-x-5 overflow-hidden whitespace-nowrap align-top`,
 				isPending ? 'animate-pulse' : ''
-			}`}
+			)}
 		>
 			<Form {...form}>
 				<form
 					onSubmit={form.handleSubmit(onSubmit)}
 					className={cn(
-						`inline-block w-full transform space-y-3 transition-all`,
+						`inline-block w-full transform space-y-3 p-1 transition-all`,
 						{
 							'-translate-x-[110%]': isConfirmed,
 						}
@@ -156,8 +159,7 @@ export default function SignUp({ redirectTo }: { redirectTo: string }) {
 								</FormLabel>
 								<FormControl>
 									<Input
-										className="h-8"
-										placeholder="example@gmail.com"
+										placeholder="Email.."
 										type="email"
 										{...field}
 									/>
@@ -175,18 +177,19 @@ export default function SignUp({ redirectTo }: { redirectTo: string }) {
 									Password
 								</FormLabel>
 								<FormControl>
-									<div className="relative">
+									<div className="relative flex items-center gap-2">
 										<Input
-											className="h-8"
 											type={
 												passwordReveal
 													? 'text'
 													: 'password'
 											}
+											placeholder="Password..."
 											{...field}
 										/>
-										<div
-											className="group absolute right-2 top-[30%] cursor-pointer"
+										<Toggle
+											variant="outline"
+											aria-label="Toggle password"
 											onClick={() =>
 												setPasswordReveal(
 													!passwordReveal
@@ -194,11 +197,11 @@ export default function SignUp({ redirectTo }: { redirectTo: string }) {
 											}
 										>
 											{passwordReveal ? (
-												<FaRegEye className="transition-all group-hover:scale-105" />
+												<Eye className="size-4" />
 											) : (
-												<FaRegEyeSlash className="transition-all group-hover:scale-105" />
+												<EyeOff className="size-4" />
 											)}
-										</div>
+										</Toggle>
 									</div>
 								</FormControl>
 								<FormMessage className="text-red-500" />
@@ -214,18 +217,19 @@ export default function SignUp({ redirectTo }: { redirectTo: string }) {
 									Confirm Password
 								</FormLabel>
 								<FormControl>
-									<div className="relative">
+									<div className="relative flex items-center gap-2">
 										<Input
-											className="h-8"
 											type={
 												passwordReveal
 													? 'text'
 													: 'password'
 											}
+											placeholder="Password..."
 											{...field}
 										/>
-										<div
-											className="group absolute right-2 top-[30%] cursor-pointer"
+										<Toggle
+											variant="outline"
+											aria-label="Toggle password"
 											onClick={() =>
 												setPasswordReveal(
 													!passwordReveal
@@ -233,20 +237,21 @@ export default function SignUp({ redirectTo }: { redirectTo: string }) {
 											}
 										>
 											{passwordReveal ? (
-												<FaRegEye className="transition-all group-hover:scale-105" />
+												<Eye className="size-4" />
 											) : (
-												<FaRegEyeSlash className="transition-all group-hover:scale-105" />
+												<EyeOff className="size-4" />
 											)}
-										</div>
+										</Toggle>
 									</div>
 								</FormControl>
 								<FormMessage className="text-red-500" />
 							</FormItem>
 						)}
 					/>
-					<Button
+					<TextureButton
 						type="submit"
-						className="flex h-8 w-full items-center gap-2 bg-indigo-500 text-white transition-all hover:bg-indigo-600"
+						variant="primary"
+						disabled={isPending}
 					>
 						<AiOutlineLoading3Quarters
 							className={cn(
@@ -255,24 +260,24 @@ export default function SignUp({ redirectTo }: { redirectTo: string }) {
 						/>
 						Continue
 						<RiArrowRightSFill className="size-4" />
-					</Button>
-					<div className="text-center text-sm">
-						<h1>
-							Already have account?{' '}
-							<Link
-								href={
-									redirectTo
-										? `/signin?next=` + redirectTo
-										: '/signin'
-								}
-								className="text-blue-400"
-							>
-								Signin
-							</Link>
-						</h1>
+					</TextureButton>
+
+					<div className="mt-4 text-center text-sm">
+						Have an account?{' '}
+						<Link
+							href={
+								redirectTo
+									? `/sign-in?next=` + redirectTo
+									: '/sign-in'
+							}
+							className="underline"
+						>
+							Sign In
+						</Link>
 					</div>
 				</form>
 			</Form>
+
 			{/* verify email */}
 			<div
 				className={cn(
@@ -283,12 +288,12 @@ export default function SignUp({ redirectTo }: { redirectTo: string }) {
 				<div className="flex h-full flex-col items-center justify-center space-y-5">
 					<SiMinutemailer className="size-8" />
 
-					<h1 className="text-center text-2xl font-semibold">
+					<h1 className="text-center text-2xl font-semibold text-primary">
 						Verify email
 					</h1>
-					<p className="text-center text-sm">
-						{' A verification code has been sent to '}
-						<span className="font-bold">
+					<p className="flex flex-col text-center text-sm">
+						<span>{' A verification code has been sent to '}</span>
+						<span className="font-bold underline underline-offset-2">
 							{verify === 'true'
 								? existEmail
 								: form.getValues('email')}
@@ -299,7 +304,10 @@ export default function SignUp({ redirectTo }: { redirectTo: string }) {
 						pattern={REGEXP_ONLY_DIGITS}
 						id="input-otp"
 						maxLength={6}
+						value={otpValue}
 						onChange={async value => {
+							setOtpValue(value);
+
 							if (value.length === 6) {
 								document.getElementById('input-otp')?.blur();
 								const res = await verifyOtp({
@@ -310,8 +318,17 @@ export default function SignUp({ redirectTo }: { redirectTo: string }) {
 								const { error } = JSON.parse(res) as {
 									error: unknown;
 								};
+
 								if (error) {
 									setVerifyStatus('failed');
+									setOtpValue('');
+									toast.error(
+										'Invalid OTP, please try again'
+									);
+									// set focus back to the first slot
+									document
+										.getElementById('input-otp')
+										?.focus();
 								} else {
 									setVerifyStatus('success');
 									router.push(redirectTo);
@@ -337,39 +354,31 @@ export default function SignUp({ redirectTo }: { redirectTo: string }) {
 							/>
 						</InputOTPGroup>
 					</InputOTP>
+
 					<div className="flex gap-2 text-sm">
 						<p>{"Didn't work?"} </p>
 						<span
-							className="flex cursor-pointer items-center gap-2 text-blue-400 transition-all hover:underline"
+							className="flex cursor-pointer items-center gap-2 text-primary transition-all hover:underline"
 							onClick={async () => {
+								setVerifyStatus('');
+
 								if (!isSendAgain) {
 									startSendAgain(async () => {
-										if (!form.getValues('password')) {
-											const json = await postEmail({
-												email: form.getValues('email'),
-												password:
-													form.getValues('password'),
-											});
+										// Resend the OTP without resetting the form or changing state
+										const json = await postEmail({
+											email: form.getValues('email'),
+											password:
+												form.getValues('password'),
+										});
 
-											if (json.error) {
-												toast.error(
-													'Fail to resend email'
-												);
-											} else {
-												toast.success(
-													'Please check your email.'
-												);
-											}
+										if (json.error) {
+											toast.error(
+												'Failed to resend email'
+											);
 										} else {
-											router.replace(
-												pathname || '/register'
+											toast.success(
+												'A new code has been sent to your email.'
 											);
-											form.setValue(
-												'email',
-												existEmail ?? ''
-											);
-											form.setValue('password', '');
-											setIsConfirmed(false);
 										}
 									});
 								}
@@ -385,16 +394,21 @@ export default function SignUp({ redirectTo }: { redirectTo: string }) {
 							Send me another code.
 						</span>
 					</div>
-					<Button
+					<TextureButton
 						type="submit"
-						className="flex h-8 w-full items-center gap-2 bg-indigo-500 text-white transition-all hover:bg-indigo-600"
+						variant="primary"
 						onClick={async () => {
+							form.setValue('email', '');
+							form.setValue('password', '');
+							form.setValue('confirm-pass', '');
+
+							setVerifyStatus('');
 							setIsConfirmed(false);
 						}}
 					>
 						<RiArrowDropLeftFill className="size-5" />
 						Change Email
-					</Button>
+					</TextureButton>
 				</div>
 			</div>
 		</div>

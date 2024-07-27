@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { useTheme } from 'next-themes';
 import { useEffect, useRef, useState } from 'react';
 import { ModeToggle } from '../theme-switcher';
+import Logo from '../Logo';
 
 const SCROLL_BOUNDARY = 120;
 
@@ -62,7 +63,7 @@ export function Header() {
 	return (
 		<header
 			ref={fixedNavRef}
-			className="mx-auto flex w-full items-center justify-between bg-transparent px-10 py-7 dark:bg-transparent"
+			className="sticky top-0 z-50 mx-auto flex w-full items-center justify-between bg-transparent px-10 py-7 dark:bg-transparent"
 		>
 			<div className="z-10 hidden flex-row items-center justify-center gap-2 lg:flex">
 				{/* <a href="#" className="flex h-8 w-8">
@@ -72,7 +73,7 @@ export function Header() {
 			</div>
 
 			{/* <h1 className="hidden lg:flex">Logo</h1> */}
-			<div className="fixed inset-x-0 top-6 flex items-center justify-center">
+			<div className="inset-x-0 top-6 flex items-center justify-center">
 				<motion.div
 					initial={{ x: 0 }}
 					animate={{
@@ -94,10 +95,7 @@ export function Header() {
 					<ul className="flex h-full w-full flex-row justify-between gap-6 lg:flex-row lg:justify-start lg:gap-1">
 						<li className="flex items-center justify-center px-2 py-0.5">
 							<a href="#" className="flex h-8 w-8 lg:hidden">
-								<img
-									src="/icon.png"
-									className="h-full w-full"
-								/>
+								<Logo />
 							</a>
 							<a href="#" className="hidden lg:flex">
 								Home

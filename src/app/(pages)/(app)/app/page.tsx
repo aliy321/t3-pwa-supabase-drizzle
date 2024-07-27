@@ -16,13 +16,13 @@ export default async function PrivatePage() {
 
 	// return <p>Hello {data?.user?.email}</p>;
 	return (
-		<div className="mx-8 space-y-6">
+		<div className="space-y-6 pb-8">
 			<ScrollArea className="w-full whitespace-nowrap rounded-md">
 				<div className="flex w-max space-x-4 pb-4">
 					{Array.from({ length: 12 }).map((_, index) => (
 						<div
 							key={index}
-							className="mb-4 max-w-52 space-y-4 lg:max-w-sm"
+							className="max-w-52 space-y-4 lg:max-w-sm"
 						>
 							<CardCarousel />
 							<div>

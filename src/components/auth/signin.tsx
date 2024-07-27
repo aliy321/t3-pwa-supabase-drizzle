@@ -1,16 +1,13 @@
 'use client';
-import React, { useState, useTransition } from 'react';
+import { useState, useTransition } from 'react';
 import Social from './social';
-import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa6';
 import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 
-import { Button } from '@/components/ui/button';
 import {
 	Form,
 	FormControl,
@@ -23,9 +20,21 @@ import { Input } from '@/components/ui/input';
 import { toast } from 'sonner';
 import { createSupabaseBrowser } from '~/utils/supabase/client';
 import { cn } from '~/lib/utils';
-import Link from 'next/link';
 import { app_config } from '~/config';
 import Logo from '@/components/Logo';
+
+import TextureCard, {
+	TextureCardContent,
+	TextureCardDescription,
+	TextureCardHeader,
+	TextureCardTitle,
+	TextureSeparator,
+} from '@/components/ui/texture-card';
+import { TextureButton } from '../ui/texture-button';
+import { DevLoginButtons } from '~/app/(pages)/(auth)/_component/DevLoginButtons';
+import { Toggle } from '../ui/toggle';
+import { Eye, EyeOff } from 'lucide-react';
+import { Link } from 'next-view-transitions';
 
 const FormSchema = z.object({
 	email: z.string().email({ message: 'Invalid Email Address' }),
@@ -41,25 +50,55 @@ export default function SignIn() {
 	const next = urlParams.get('next');
 
 	return (
-		<div className="w-full rounded-md border shadow dark:border-zinc-800 sm:w-[26rem] sm:p-5">
-			<div className="space-y-5 p-5">
-				<div className="space-y-3 text-center">
-					<div className="flex items-center justify-center">
-						<Logo />
+		<div className="flex flex-col gap-6">
+			<TextureCard className="">
+				<TextureCardHeader className="space-y-3 text-center">
+					<div className="space-y-3 text-center">
+						<div className="flex items-center justify-center">
+							<Link href="/" className="cursor-pointer">
+								<Logo />
+							</Link>
+						</div>
 					</div>
-					<h1 className="font-bold">Sign in to {app_config.name}</h1>
-					<p className="text-sm">
-						Welcome back! Please sign in to continue
-					</p>
-				</div>
-				<Social redirectTo={next ?? '/'} />
-				<div className="flex items-center gap-5">
-					<div className="h-[0.5px] w-full flex-1 bg-zinc-400 dark:bg-zinc-800"></div>
-					<div className="text-sm">or</div>
-					<div className="h-[0.5px] w-full flex-1 bg-zinc-400 dark:bg-zinc-800"></div>
-				</div>
-				<SignInForm redirectTo={next ?? '/'} />
-			</div>
+					<TextureCardTitle className="text-xl">
+						Sign in to {app_config.name}
+					</TextureCardTitle>
+					<TextureCardDescription>
+						Welcome back! Please sign in to continue.
+					</TextureCardDescription>
+				</TextureCardHeader>
+				<TextureCardContent className="space-y-4">
+					<Social redirectTo={next ?? '/'} />
+
+					<div className="flex items-center gap-4">
+						<div className="w-full">
+							<TextureSeparator />
+						</div>
+						<div className="text-sm">or</div>
+						<div className="w-full">
+							<TextureSeparator />
+						</div>
+					</div>
+
+					<SignInForm redirectTo={next ?? '/'} />
+				</TextureCardContent>
+			</TextureCard>
+
+			{process.env.NEXT_PUBLIC_VERCEL_ENV !== 'production' && (
+				<TextureCard className="mx-auto w-full text-center">
+					<TextureCardHeader>
+						<TextureCardTitle className="text-xl">
+							Dev Tool
+						</TextureCardTitle>
+						<TextureCardDescription>
+							Quick login for development
+						</TextureCardDescription>
+					</TextureCardHeader>
+					<TextureCardContent>
+						<DevLoginButtons />
+					</TextureCardContent>
+				</TextureCard>
+			)}
 		</div>
 	);
 }
@@ -107,8 +146,7 @@ export function SignInForm({ redirectTo }: { redirectTo: string }) {
 							</FormLabel>
 							<FormControl>
 								<Input
-									className="h-8"
-									placeholder="example@gmail.com"
+									placeholder="Email..."
 									type="email"
 									{...field}
 								/>
@@ -126,35 +164,38 @@ export function SignInForm({ redirectTo }: { redirectTo: string }) {
 								Password
 							</FormLabel>
 							<FormControl>
-								<div className="relative">
+								<div className="relative flex items-center gap-2">
 									<Input
-										className="h-8"
 										type={
 											passwordReveal ? 'text' : 'password'
 										}
+										placeholder="Password..."
 										{...field}
 									/>
-									<div
-										className="group absolute right-2 top-[30%] cursor-pointer"
+									<Toggle
+										variant="outline"
+										aria-label="Toggle password"
 										onClick={() =>
 											setPasswordReveal(!passwordReveal)
 										}
 									>
 										{passwordReveal ? (
-											<FaRegEye className="transition-all group-hover:scale-105" />
+											<Eye className="size-4" />
 										) : (
-											<FaRegEyeSlash className="transition-all group-hover:scale-105" />
+											<EyeOff className="size-4" />
 										)}
-									</div>
+									</Toggle>
 								</div>
 							</FormControl>
 							<FormMessage className="text-red-500" />
 						</FormItem>
 					)}
 				/>
-				<Button
+				<TextureButton
 					type="submit"
-					className="flex h-8 w-full items-center gap-2 bg-indigo-500 text-white transition-all hover:bg-indigo-600"
+					variant="primary"
+					disabled={isPending}
+					// className="flex h-8 w-full items-center gap-2 bg-indigo-500 text-white transition-all hover:bg-indigo-600"
 				>
 					<AiOutlineLoading3Quarters
 						className={cn(
@@ -162,22 +203,18 @@ export function SignInForm({ redirectTo }: { redirectTo: string }) {
 						)}
 					/>
 					Continue
-				</Button>
+				</TextureButton>
 			</form>
-			<div className="text-center text-sm">
-				<h1>
-					Doest not have account yet?{' '}
-					<Link
-						href={
-							redirectTo
-								? `/register?next=` + redirectTo
-								: '/register'
-						}
-						className="text-blue-400"
-					>
-						Register
-					</Link>
-				</h1>
+			<div className="mt-4 text-center text-sm">
+				Don&apos;t have an account?{' '}
+				<Link
+					href={
+						redirectTo ? `/sign-up?next=` + redirectTo : '/sign-up'
+					}
+					className="underline"
+				>
+					Sign up
+				</Link>
 			</div>
 		</Form>
 	);
