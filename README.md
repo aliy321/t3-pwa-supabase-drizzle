@@ -13,15 +13,11 @@ Checklist
 
 -   [x] Add Resend
 
--   [x] Fix sitemap, robots, error, not found etc. pages
-
--   [x] Add view transition
-
--   [ ] Add Stripe
-
--   [ ] Re-structure UI layers - header/footer for app and dashboard
-
 -   [ ] Detect user currently on the page or left
+
+-   [ ] Fix sitemap, robots, error, not found etc. pages
+
+-   [ ] Add view transition
 
 -   [ ] Trigger default system prompt
 
@@ -40,6 +36,18 @@ To change logo, check `"/component/logo.tsx"` to update the svg. All usage for l
 ## OG Image
 
 To change og image, check `"/public/opengraph-image.png"` and replace with new one, take note to keep the same name.
+
+## Stripe CLI local webhook
+
+[Install the Stripe CLI](https://stripe.com/docs/stripe-cli) and [link your Stripe account](https://stripe.com/docs/stripe-cli#login-account).
+
+Next, start local webhook forwarding:
+
+```bash
+stripe listen --forward-to=localhost:3000/api/stripe
+```
+
+Running this Stripe command will print a webhook secret (such as, `whsec_***`) to the console. Set `STRIPE_WEBHOOK_SECRET` to this value in your `.env.local` file.
 
 ## What's next? How do I make an app with this?
 

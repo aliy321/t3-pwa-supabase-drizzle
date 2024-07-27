@@ -1,9 +1,9 @@
-import Link from 'next/link';
+// import Link from 'next/link';
 
-import { LatestPost } from '~/components/post';
-import { Charts } from '~/components/Chars';
-import { api } from '~/trpc/server';
-import { ModeToggle } from '~/components/theme-switcher';
+// import { LatestPost } from '~/components/post';
+// import { Charts } from '~/components/Chars';
+// import { api } from '~/trpc/server';
+// import { ModeToggle } from '~/components/theme-switcher';
 import HeroSection from '~/components/landing/hero-section';
 import ClientSection from '~/components/landing/client-section';
 import { SphereMask } from '~/components/magicui/sphere-mask';

@@ -53,3 +53,5 @@ yarn-error.log*
 **/public/precache**
 # Sentry Config File
 .env.sentry-build-plugin
+
+certificates
