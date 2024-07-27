@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { getBaseUrl } from './utils';
 import { app_config } from '~/config';
+import { headers } from 'next/headers';
 
 export interface MetadataOptions {
 	title?: Metadata['title'];
@@ -12,6 +13,8 @@ export interface MetadataOptions {
 export async function generateDynamicMetadata(
 	options: MetadataOptions
 ): Promise<Metadata> {
+	const origin = headers().get('referer');
+
 	return {
 		metadataBase: new URL(getBaseUrl()),
 		title: {
@@ -35,7 +38,9 @@ export async function generateDynamicMetadata(
 				template: app_config.site.title_template,
 			},
 			description: options.description ?? app_config.site.description,
-			url: new URL(String(options.openGraph?.url ?? getBaseUrl())),
+			url: origin
+				? new URL(String(origin))
+				: new URL(app_config.site.url),
 			images: [
 				{
 					url: '/opengraph-image.png',

@@ -17,8 +17,8 @@ export const env = createEnv({
 		SENTRY_AUTH_TOKEN: z.string().min(1),
 		RESEND_API_KEY: z.string().min(1),
 		RESEND_DOMAIN: z.string().min(1),
-		STRIPE_SECRET_KEY: z.string().min(1),
-		STRIPE_WEBHOOK_SECRET: z.string().min(1),
+		STRIPE_SECRET_KEY: z.string().optional(),
+		STRIPE_WEBHOOK_SECRET: z.string().optional(),
 	},
 
 	/**
@@ -34,7 +34,7 @@ export const env = createEnv({
 		NEXT_PUBLIC_BASE_URL: z.string().optional(),
 		NEXT_PUBLIC_GTM_ID: z.string().optional(),
 		NEXT_PUBLIC_GA_ID: z.string().optional(),
-		NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: z.string().min(1),
+		NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: z.string().min(1).optional(),
 	},
 
 	/**

@@ -1,15 +1,28 @@
-import Link from 'next/link';
-
-import { LatestPost } from '~/components/post';
-import { Charts } from '~/components/Chars';
-import { api } from '~/trpc/server';
-import { ModeToggle } from '~/components/theme-switcher';
 import HeroSection from '~/components/landing/hero-section';
 import ClientSection from '~/components/landing/client-section';
 import { SphereMask } from '~/components/magicui/sphere-mask';
 import PricingSection from '~/components/landing/pricing-section';
 import CallToActionSection from '~/components/landing/cta-section';
 import Particles from '~/components/magicui/particles';
+import { generateDynamicMetadata, type MetadataOptions } from '~/lib/metadata';
+import { type Metadata } from 'next';
+
+export async function generateMetadata({}): Promise<Metadata> {
+	const metadataOptions: MetadataOptions = {
+		title: 'About',
+		description: 'This is about page',
+		openGraph: {
+			title: 'About',
+			description: 'This is about page',
+		},
+		twitter: {
+			title: 'About',
+			description: 'This is about page',
+		},
+	};
+
+	return await generateDynamicMetadata(metadataOptions);
+}
 
 export default async function Home() {
 	// const hello = await api.post.hello({ text: 'from tRPC' });
