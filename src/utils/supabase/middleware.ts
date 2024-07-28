@@ -55,6 +55,12 @@ export async function updateSession(request: NextRequest) {
 		}
 	);
 
+	const headers = new Headers(request.headers);
+	headers.set('x-current-path', request.nextUrl.pathname);
+	headers.set('x-full-url', request.nextUrl.toString());
+	response.headers.set('x-current-path', request.nextUrl.pathname);
+	response.headers.set('x-full-url', request.nextUrl.toString());
+
 	const user = await supabase.auth.getUser();
 	const url = new URL(request.url);
 	const next = url.searchParams.get('next');
@@ -66,7 +72,7 @@ export async function updateSession(request: NextRequest) {
 	} else {
 		if (protectedPaths.includes(url.pathname)) {
 			return NextResponse.redirect(
-				new URL('/signin?next=' + (next ?? url.pathname), request.url)
+				new URL('/sign-in?next=' + (next ?? url.pathname), request.url)
 			);
 		}
 		return response;

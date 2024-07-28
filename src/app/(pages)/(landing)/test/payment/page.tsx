@@ -32,7 +32,7 @@ const page = () => {
 				</h2>
 			</div>
 
-			{/* <h2>one time payment</h2>
+			<h2>one time payment</h2>
 			<Elements
 				stripe={stripePromise}
 				options={{
@@ -43,7 +43,7 @@ const page = () => {
 				}}
 			>
 				<CheckoutPage amount={amount} />
-			</Elements> */}
+			</Elements>
 
 			<h2>subscription</h2>
 			<Elements

@@ -13,11 +13,13 @@ Checklist
 
 -   [x] Add Resend
 
+-   [x] Add view transition
+
+-   [x] Fix sitemap, robots, error, not found etc. pages
+
+-   [x] Add Stripe Element
+
 -   [ ] Detect user currently on the page or left
-
--   [ ] Fix sitemap, robots, error, not found etc. pages
-
--   [ ] Add view transition
 
 -   [ ] Trigger default system prompt
 

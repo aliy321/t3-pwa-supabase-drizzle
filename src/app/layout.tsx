@@ -10,6 +10,7 @@ import { generateDynamicMetadata, type MetadataOptions } from '~/lib/metadata';
 import { TRPCReactProvider } from '~/trpc/react';
 import { HydrateClient } from '~/trpc/server';
 import { cn } from '~/lib/utils';
+import { Suspense } from 'react';
 const RootProviders = dynamic(
 	() => import('~/components/Providers/RootProviders'),
 	{ ssr: false }
@@ -54,10 +55,12 @@ export default function RootLayout({
 			>
 				<body className="size-full min-h-svh">
 					<TRPCReactProvider>
-						<RootProviders>
-							{/* HydrateClient is use for t3-stack */}
-							<HydrateClient>{children}</HydrateClient>
-						</RootProviders>
+						<Suspense fallback={null}>
+							<RootProviders>
+								{/* HydrateClient is use for t3-stack */}
+								<HydrateClient>{children}</HydrateClient>
+							</RootProviders>
+						</Suspense>
 					</TRPCReactProvider>
 				</body>
 			</html>

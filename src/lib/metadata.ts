@@ -13,7 +13,11 @@ export interface MetadataOptions {
 export async function generateDynamicMetadata(
 	options: MetadataOptions
 ): Promise<Metadata> {
-	const origin = headers().get('referer');
+	// const current = headers().get('x-current-path');
+	// console.log('current', current);
+
+	const full = headers().get('x-full-url');
+	console.log('full', full);
 
 	return {
 		metadataBase: new URL(getBaseUrl()),
@@ -38,9 +42,7 @@ export async function generateDynamicMetadata(
 				template: app_config.site.title_template,
 			},
 			description: options.description ?? app_config.site.description,
-			url: origin
-				? new URL(String(origin))
-				: new URL(app_config.site.url),
+			url: full ? new URL(String(full)) : new URL(app_config.site.url),
 			images: [
 				{
 					url: '/opengraph-image.png',
